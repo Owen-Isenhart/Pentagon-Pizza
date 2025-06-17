@@ -30,9 +30,7 @@ export async function POST(request: Request) {
   const body = await request.json();
   const searchQuery = body.query;
 
-  // Loop through all available keys, starting from the current index.
   for (let i = 0; i < API_KEYS.length; i++) {
-    // Get the current key and advance the global index for the next request
     const currentIndex = (keyIndex + i) % API_KEYS.length;
     const currentKey = API_KEYS[currentIndex];
 
@@ -50,11 +48,7 @@ export async function POST(request: Request) {
     };
 
     try {
-      // --- Make the API call ---
       const response = await axios.get('https://api.scrapingdog.com/google/', { params });
-
-      // --- Success! ---
-      // Update the global index to the *next* key for the next time this function is called.
       keyIndex = (currentIndex + 1) % API_KEYS.length;
       console.log(`Success! Next request will start with key at index: ${keyIndex}`);
       
@@ -70,16 +64,11 @@ export async function POST(request: Request) {
       const status = error.response?.status;
       const errorDetails = error.response?.data || error.message;
 
-      // --- Check for a specific "permission" error ---
-      // 401 (Unauthorized) and 403 (Forbidden) are common for key issues.
-      // You might need to adjust this based on ScrapingDog's actual error response.
       if (status === 401 || status === 403) {
         console.warn(`Key at index ${currentIndex} failed with status ${status}. Trying next key.`);
-        // The 'continue' statement will proceed to the next iteration of the loop
         continue;
       }
 
-      // If it's a different kind of error, fail immediately.
       console.error(`A non-permission error occurred: ${status}`, errorDetails);
       return NextResponse.json(
         { error: 'ScrapingDog API error', details: errorDetails },
@@ -88,7 +77,6 @@ export async function POST(request: Request) {
     }
   }
 
-  // If the loop completes without a successful request, all keys have failed.
   console.error('All API keys failed.');
   return NextResponse.json(
     { error: 'All available API keys failed or have insufficient permissions.' },

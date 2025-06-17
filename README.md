@@ -1,36 +1,22 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Pentagon Pizza
 
-First, run the development server:
+*They track us, so we track their pizza*
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Website Demo
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+[![Watch the project demo](https://i.ytimg.com/vi/4N528p4Y6-c/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGEAgZShJMA8=&amp;rs=AOn4CLDU06cX0KASoe_nZRdi7fgXWzMS6g)](https://youtu.be/4N528p4Y6-c?si=98oDxe8Q_R9CAnlq)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## About The Project
 
-## Learn More
+Pentagon Pizza is based on a real-world theory: a spike in late-night pizza orders at the Pentagon often precedes a major global crisis. This application automates the monitoring process, providing an early warning system for significant geopolitical events.
 
-To learn more about Next.js, take a look at the following resources:
+By scraping data from pizza establishments in close proximity to the Pentagon, our system analyzes activity levels in real-time. When these levels cross a pre-defined threshold, a "High Threat Level" is triggered, and an alert is immediately sent out.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Key Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* **Real-Time Web Scraping:** Utilizes Scrapingdog's Google SERP API to grab the html of resturant's google business profile which is then parsed through to determine how busy they are.
+* **Threat Level Analysis:** Compiles how busy the nearest pizza places are and determines the threat level using a weighted algorithm.
+* **Email Notifications:** Users can enter their email to get notified of high threat levels. Their email is sent to formspree which triggers a webhook connected to a discord server, and then a discord bot can then email all users alerts. (the script is not in this repo)
