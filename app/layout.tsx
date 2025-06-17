@@ -14,7 +14,8 @@ const oswald = Silkscreen({
 // ok this is called ibm_mono bc i was using it but then switched to this and didn't want to change all the variable names
 const ibm_mono = Chakra_Petch({
   weight: '400',
-  variable: "--font-ibm-mono"
+  variable: "--font-ibm-mono",
+  subsets: ['latin']
 });
 
 export const metadata: Metadata = {
