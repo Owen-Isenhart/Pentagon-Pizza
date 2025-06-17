@@ -1,21 +1,39 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000;
+  --light-background: #1E2124;
+  --outline: #30363A;
+  --foreground: #FFFFFF;
+  --light-foreground: #e7e7e7;
+  --dark-green: #5F8D37;
+  --green: #01E212;
+  --yellow: #FFC90E;
+  --red: #FF5000;
+  --dark-red: #BB3E00;
+  --pixel-size: 0.2;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-light-background: var(--light-background);
+  --color-outline: var(--outline);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-light-foreground: var(--light-foreground);
+  --color-dark-green: var(--dark-green);
+  --color-green: var(--green);
+  --color-yellow: var(--yellow);
+  --color-red: var(--red);
+  --color-dark-red: var(--dark-red);
+  --font-oswald: var(--font-oswald);
+  --font-ibm: var(--font-ibm-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+
   }
 }
 
@@ -23,4 +41,144 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* bro i've done so much animation and worked with so many spritesheets in my day, but it's all been for game development and done in c#
+   tell me how I managed to pick the WORST website to draw the frames in (it exported the drawings with a random 20px border around each frame *NOBODY DOES THAT FOR SPRITESHEETS*)
+   but also doing the actual animations in css is HORRIBLE. I got this to work but it's still jank, and if I touch anything the whole thing will crumble so im just gonna leave it like this
+   it looks cool but jesus I will not be doing animations like this in css if I can avoid it. ok crash out over
+*/
+.sprite-player {
+  background-repeat: no-repeat;
+  filter: invert(1);
+  transform-origin: top left;
+}
+
+
+.sprite-wrapper-character {
+  width: 252px;
+  height: 252px;
+
+}
+
+.sprite-player-character {
+  width: 504px;
+  height: 504px;
+  background-image: url('../public/images/creature (1).png');
+  animation: frameJumpSix 1s steps(1) infinite;
+  transform: scale(0.5);
+}
+
+.sprite-wrapper-bubble {
+  width: 256px;
+  height: 256px;
+}
+
+.sprite-player-bubble {
+  width: 512px;
+  height: 512px;
+  transform: scale(0.5);
+  animation: frameJumpFour 0.7s steps(1) infinite;
+}
+
+.sprite-home {
+  background-image: url('../public/images/home-bubble.png');
+}
+
+.sprite-about {
+  background-image: url('../public/images/about-bubble.png');
+}
+
+.sprite-notify {
+  background-image: url('../public/images/notify-bubble.png');
+}
+
+/* https://codepen.io/sosuke/pen/Pjoqqp 
+    goated website, filters are how im setting the color
+    only thing is I can't add a transition to the color because it doesn't smoothly get there, like 
+    the yellow one turns pink before it gets to yellow. but wtv
+*/
+.sprite-home:hover {
+  filter: invert(46%) sepia(92%) saturate(2295%) hue-rotate(99deg) brightness(111%) contrast(122%);
+  cursor: pointer;
+}
+
+.sprite-about:hover {
+  filter: invert(81%) sepia(64%) saturate(1692%) hue-rotate(349deg) brightness(104%) contrast(101%);
+  cursor: pointer;
+}
+
+.sprite-notify:hover {
+  filter: invert(56%) sepia(70%) saturate(6847%) hue-rotate(1deg) brightness(102%) contrast(105%);
+  cursor: pointer;
+}
+
+@keyframes frameJumpSix {
+  0% {
+    background-position: -20px -20px;
+  }
+
+  16.7% {
+    background-position: -554px -20px;
+  }
+
+  33.3% {
+    background-position: -1088px -20px;
+  }
+
+  50% {
+    background-position: -20px -554px;
+  }
+
+  66.7% {
+    background-position: -554px -554px;
+  }
+
+  83.3% {
+    background-position: -1088px -554px;
+  }
+
+  100% {
+    background-position: -20px -20px;
+  }
+}
+
+@keyframes frameJumpFour {
+  0% {
+    background-position: -20px -20px;
+  }
+
+  25% {
+    background-position: -552 -20px;
+  }
+
+  50% {
+    background-position: -20px -552px;
+  }
+
+  75% {
+    background-position: -552px -552px;
+  }
+
+  0% {
+    background-position: -20px -20px;
+  }
+}
+
+/* for the modal */
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
